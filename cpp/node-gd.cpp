@@ -279,6 +279,7 @@ protected:
       NODE_SET_PROTOTYPE_METHOD(t, "arc", Arc);
       NODE_SET_PROTOTYPE_METHOD(t, "filledArc", FilledArc);
       NODE_SET_PROTOTYPE_METHOD(t, "filledEllipse", FilledEllipse);
+      NODE_SET_PROTOTYPE_METHOD(t, "ellipse", Ellipse);
       NODE_SET_PROTOTYPE_METHOD(t, "fill", Fill);
       NODE_SET_PROTOTYPE_METHOD(t, "setAntiAliased", SetAntiAliased);
       NODE_SET_PROTOTYPE_METHOD(t, "setAntiAliasedDontBlend", SetAntiAliasedDontBlend);
@@ -763,6 +764,22 @@ protected:
       REQ_INT_ARG(4, color);
 
       gdImageFilledEllipse(*im, cx, cy, width, height, color);
+
+      return args.This();
+    }
+
+    static Handle<Value>Ellipse (const Arguments &args)
+    {
+      Image *im = ObjectWrap::Unwrap<Image>(args.This());
+
+      REQ_ARGS(5);
+      REQ_INT_ARG(0, cx);
+      REQ_INT_ARG(1, cy);
+      REQ_INT_ARG(2, width);
+      REQ_INT_ARG(3, height);
+      REQ_INT_ARG(4, color);
+
+      gdImageEllipse(*im, cx, cy, width, height, color);
 
       return args.This();
     }
